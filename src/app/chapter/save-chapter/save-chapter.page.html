@@ -1,0 +1,56 @@
+<app-kheader-back [title]="headerTitle"></app-kheader-back>
+
+<ion-content>
+  <div class="container">
+    <div class="spinner" *ngIf="isLoading">
+      <ion-spinner></ion-spinner>
+      <div>Loading data ...</div>
+    </div>
+    <div class="form">
+      <form [formGroup]="ChapterGroup">
+        <div class="form-group">
+          <label>No</label>
+          <input type="text" formControlName="id" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" formControlName="title" required>
+          <div class="error" *ngIf="title.invalid && title.touched">
+            <div *ngIf="title.errors.required">
+              Title is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Summary</label>
+          <textarea class="form-control summary" formControlName="summary" required></textarea>
+          <div class="error" *ngIf="summary.invalid && summary.touched">
+            <div *ngIf="summary.errors.required">
+              Summary is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Verse Ref</label>
+          <input type="text" class="form-control" formControlName="memoryVerseRef">
+        </div>
+        <div class="form-group">
+          <label>Verse</label>
+          <textarea class="form-control memoryVerse" formControlName="memoryVerse"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Reading Portion</label>
+          <input type="text" class="form-control" formControlName="readingPortion">
+        </div>
+
+        <div class="btn">
+          <button type="submit" (click)="save()" class="btn btn-default">Save</button>
+        </div>
+        <br>
+        <!-- <label class="error">{{errorMessage}}</label>
+        <label class="success">{{successMessage}}</label> -->
+      </form>
+    </div>
+
+  </div>
+</ion-content>

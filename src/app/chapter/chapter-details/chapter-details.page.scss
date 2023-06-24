@@ -1,0 +1,31 @@
+.btn{
+  text-align: center;
+}
+div.container {
+  margin: 10px auto;
+  max-width: 600px;
+}
+div.spinner{
+  text-align: center;
+}
+div.notesHeading {
+  font-size: 1.3rem;
+}
+div.chapter {
+  margin: 20px auto;
+  padding: 10px;
+  // border-radius: 10px;
+  // border: 1px solid silver;
+  // box-shadow: 1px 5px 10px var(--var-color-boxshadow);
+}
+div {
+  padding: 5px;
+}
+div.label {
+  color: var(--ion-color-tertiary); //blue;
+  font-weight: bold;
+}
+div.memoryVerseRef {
+  padding-left: 50%;
+  color: blue;
+}

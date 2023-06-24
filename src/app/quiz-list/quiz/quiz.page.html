@@ -1,0 +1,77 @@
+<app-kheader-back [title]="headerTitle" (click)="bEnableEdit = !bEnableEdit">
+</app-kheader-back>
+
+<ion-content class="QuizPage">
+  <div class="container">
+    <div class="spinner" *ngIf="isLoading">
+      <ion-spinner></ion-spinner>
+    </div>
+    <div class="data" *ngIf="!quizCompleted && !isLoading && quizSet.length == 0">
+      No quiz available for this chapter yet ... <br>
+      It will be added soon
+    </div>
+    <div class="quiz" *ngIf="!quizCompleted && !isLoading && quizSet.length > 0 && !quizCompleted"
+      (click)="optionSelected($event)">
+      <div class="question">
+        <span>
+          {{currentIndex +1 }}.
+        </span>
+        {{quizSet[currentIndex].question}}
+      </div>
+
+      <div class="option optionB" id="optionA"
+        [ngClass]="{'optionSelected': quizSet[currentIndex].selectedOption === 0}">
+        <span [ngClass]="{'optionSelected': quizSet[currentIndex].selectedOption === 0}">A. </span>
+        {{quizSet[currentIndex].optionA}}
+      </div>
+      <div class="option optionB" id="optionB"
+        [ngClass]="{'optionSelected': quizSet[currentIndex].selectedOption === 1}">
+        <span [ngClass]="{'optionSelected': quizSet[currentIndex].selectedOption === 1}">B.
+        </span>{{quizSet[currentIndex].optionB}}
+      </div>
+      <div class="option optionC" id="optionC"
+        [ngClass]="{'optionSelected': quizSet[currentIndex].selectedOption === 2}">
+        <span [ngClass]="{'optionSelected': quizSet[currentIndex].selectedOption === 2}">C.
+        </span>{{quizSet[currentIndex].optionC}}
+      </div>
+      <div class="option optionD" id="optionD"
+        [ngClass]="{'optionSelected': quizSet[currentIndex].selectedOption === 3}">
+        <span [ngClass]="{'optionSelected': quizSet[currentIndex].selectedOption === 3}">D.
+        </span>{{quizSet[currentIndex].optionD}}
+      </div>
+      <div class="bottom">
+        <span class="current">{{currentIndex + 1}}</span>
+        <span>/</span>
+        <span class="total">{{quizSet.length}} </span>
+      </div>
+      <div class="footer">
+        <div class="btn prev" [style.flex]="1" (click)="showPrev()" *ngIf="currentIndex > 0">
+          Prev
+        </div>
+        <div class="dummy" [style.flex]="currentIndex > 0 ? 2 : 3"></div>
+        <div class="btn next" [style.flex]="1" (click)="showNext()">
+          {{ currentIndex == quizSet.length -1 ? "Complete" : "Next" }}
+        </div>
+      </div>
+    </div>
+
+    <div class="quizCompleted" [ngClass]="{'hideResult': !quizCompleted}">
+      <div class="quizResult">
+        <div class="resultHeading">
+          Your Score:
+        </div>
+        <span class="correct">{{correctCount}}</span>
+        <span>/</span>
+        <span class="total">{{totalQuestions}}</span>
+      </div>
+      <div class="Remarks"></div>
+      <div class="btn tryagain" (click)="tryagain()">
+        Retry quiz
+      </div>
+    </div>
+  </div>
+  <div class="edit" *ngIf="isAuth && bEnableEdit">
+    <button (click)="addQuiz()">Add quiz</button>
+    <button [routerLink]="['/', 'quiz-list', 'save-quiz', chapterKey, quizSet[currentIndex].key]">Edit quiz</button>
+  </div>
+</ion-content>

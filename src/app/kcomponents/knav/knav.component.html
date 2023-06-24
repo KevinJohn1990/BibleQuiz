@@ -1,0 +1,23 @@
+<div class="pagination">
+  <button class="first" (click)="firstPage()">
+    <!-- &lt;&lt; -->
+    <ion-icon name="play-skip-back-outline"></ion-icon>
+  </button>
+  <button class="prev" (click)="prevPage()">
+    <ion-icon name="play-back-outline"></ion-icon>
+    <!-- &lt; -->
+  </button>
+  <span>{{from < 1 ? 0 : from}}</span>
+  <span>-</span>
+  <span>{{to > total ? total : to}}</span>
+  <span>/</span>
+  <span>{{total}}</span>
+  <button class="next" (click)="nextPage()">
+    <ion-icon name="play-forward-outline"></ion-icon>
+    <!-- &gt; -->
+  </button>
+  <button class="last" (click)="lastPage()">
+    <ion-icon name="play-skip-forward-outline"></ion-icon>
+    <!-- &gt;&gt; -->
+  </button>
+</div>

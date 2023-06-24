@@ -1,0 +1,23 @@
+<app-kheader-back [title]="'Quiz List'"></app-kheader-back>
+<ion-content>
+  <div class="container">
+    <app-ksearch [placeholder]="'Search by Chapter No - type no and hit enter'" (keyenter)="getChapters($event,startIndex, endIndex)" [searchText]="searchText"></app-ksearch>
+
+    <div class="spinner" *ngIf="isLoading">
+      <ion-spinner></ion-spinner>
+    </div>
+    <div class="data" *ngIf="!isLoading">
+      <div class="chapter" *ngFor="let chapter of chapters" [routerLink]="['/', 'quiz-list','quiz', chapter.key]">
+        <div class="title">
+          <span>
+            Quiz - {{chapter.id}}.
+          </span>{{chapter.title}}
+        </div>
+      </div>
+    </div>
+    <app-knav [style.display]="bShowPagination && !isLoading ? 'block': 'none'" [interval]="pageInterval" [total]="total"
+      (NavAction)="navOutput($event)">
+    </app-knav>
+    <br>
+  </div>
+</ion-content>

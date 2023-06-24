@@ -1,0 +1,29 @@
+<app-kheader-back [title]="'Chapters List'"></app-kheader-back>
+
+<ion-content>
+  <div class="container">
+    
+    <app-ksearch [placeholder]="'Search by Chapter No - type no and hit enter'" (keyenter)="getChapters($event,startIndex, endIndex)" [searchText]="searchText"></app-ksearch>
+
+    <div class="spinner" *ngIf="isLoading">
+      <ion-spinner></ion-spinner>
+      <div>Loading data ...</div>
+    </div>
+    <div class="data" *ngIf="!isLoading">
+      <div class="chapter" *ngFor="let chapter of chapters" [routerLink]="['/', 'chapter','details', chapter.key]">
+        <div class="title">
+          <span>
+            {{chapter.id}}.
+          </span>{{chapter.title}}
+        </div>
+      </div>
+    </div>
+    <app-knav [style.display]="bShowPagination && !isLoading ? 'block': 'none'" [interval]="pageInterval" [total]="total"    
+      (NavAction)="navOutput($event)">
+    </app-knav>
+    <br>
+    <div *ngIf="isAuth && !isLoading" class="addNew">
+      <button type="submit" (click)="addNewChapter()" class="btn btn-default">Add new chapter</button>
+    </div>
+  </div>
+</ion-content>

@@ -24,3 +24,35 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+/* custom css - global app specific */
+:root {
+    --var-color-red: rgb(156, 32, 11);
+    --var-color-green: rgb(86, 165, 21);
+    --var-color-blue: #5260ff;
+    --var-color-boxshadow: #5260ff;
+    --var-color-box: silver;
+    --var-color-white: white;
+    --var-color-silver: gray;
+  
+    --var-color-black: black;
+    // --var-color-bg : white;
+    // --var-color-fg : black;
+  }
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Comic Sans MS";
+  }
+  
+  @import url("src/app/utils/shared.scss");
+  
+  input {
+    background-color: var(--var-color-white);
+    color: var(--var-color-black);
+  }
+  textarea {
+    background-color: var(--var-color-white);
+    color: var(--var-color-black);
+  }
+  

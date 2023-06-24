@@ -1,0 +1,38 @@
+<app-kheader [title]="headerTitle"></app-kheader>
+<ion-content>
+  <div class="container">
+    <div class="theme">
+      <span class="header">
+        Select Theme: 
+      </span> 
+      <br>
+      <div class="setStyle" (click)="changeStyle('#5260ff')" [style.background-color]="'#5260ff'">Blue</div>
+      <div class="setStyle" (click)="changeStyle('#3880ff')" [style.background-color]="'#3880ff'">Primary</div>
+      <div class="setStyle" (click)="changeStyle('gray')" [style.background-color]="'gray'">Gray</div>
+      <div class="setStyle" (click)="changeStyle('indianred')" [style.background-color]="'indianred'">Indian Red</div>
+      <div class="setStyle" (click)="changeStyle('black')" [style.background-color]="'black'">Black</div>
+      <div class="setStyle" (click)="changeStyle('darkolivegreen')" [style.background-color]="'darkolivegreen'">Success
+      </div>
+      <div class="setStyle" (click)="changeStyle('MIDNIGHTBLUE')" [style.background-color]="'MIDNIGHTBLUE'">Midnight
+        blue</div>
+        <div class="setStyle" (click)="changeStyle('saddlebrown')" [style.background-color]="'saddlebrown'">Brown
+        </div>
+        <!-- <style>
+          div{
+            color: ;
+          }
+        </style> -->
+        <div class="setStyle" (click)="changeStyle('darkslateblue')" [style.background-color]="'darkslateblue'">Slate Blue
+        </div>        
+    </div>
+    <br>
+    <div class="pageSettings">
+      <span>Select entries per page: {{entriesPerPage}}</span>  
+      <br>
+      <button class="page" (click)="setPage(3)">3</button>
+      <button class="page" (click)="setPage(5)">5</button>
+      <button class="page" (click)="setPage(7)">7</button>
+      <button class="page" (click)="setPage(10)">10</button>
+    </div>
+  </div>
+</ion-content>

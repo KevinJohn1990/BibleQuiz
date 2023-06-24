@@ -1,0 +1,120 @@
+<app-kheader-back [title]="headerTitle"></app-kheader-back>
+
+<ion-content>
+  <div class="container">
+    <div class="spinner" *ngIf="isLoading">
+      <ion-spinner></ion-spinner>
+      <div>Loading data ...</div>
+    </div>
+    <div class="form">
+      <form [formGroup]="QuizGroup">
+        <div class="form-group">
+          <label>No</label>
+          <input
+            type="text"
+            formControlName="id"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>Seq Id</label>
+          <input
+            type="text"
+            formControlName="seqId"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label>Question</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="question"
+            required
+          />
+          <div class="error" *ngIf="question?.invalid && question?.touched">
+            <div *ngIf="question?.errors.required">Question is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Correct Option</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="correctOption"
+            required
+          />
+          <div
+            class="error"
+            *ngIf="correctOption.invalid && correctOption.touched"
+          >
+            <div *ngIf="correctOption.errors.required">
+              Correct option is required
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>optionA</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="optionA"
+            required
+          />
+          <div class="error" *ngIf="optionA.invalid && optionA.touched">
+            <div *ngIf="optionA.errors.required">optionA is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>optionB</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="optionB"
+            required
+          />
+          <div class="error" *ngIf="optionB.invalid && optionB.touched">
+            <div *ngIf="optionB.errors.required">optionB is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>optionC</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="optionC"
+            required
+          />
+          <div class="error" *ngIf="optionC.invalid && optionC.touched">
+            <div *ngIf="optionC.errors.required">optionC is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>optionD</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="optionD"
+            required
+          />
+          <div class="error" *ngIf="optionD.invalid && optionD.touched">
+            <div *ngIf="optionD.errors.required">optionD is required</div>
+          </div>
+        </div>
+
+        <div class="btn">
+          <button type="submit" (click)="save()" class="btn btn-default">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

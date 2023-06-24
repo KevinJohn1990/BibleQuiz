@@ -1,0 +1,26 @@
+
+div.mainProgress {
+    margin: 0px;
+    padding: 0px;
+    border: 1px solid silver;
+    height: 10px;
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    border-radius: 2px;
+  }
+  
+  div.mainProgress .progress {
+    border-radius: 2px;
+    padding: 0px;
+    height: 100%;
+    border: 0px;
+    transition: width 0.3s;
+    animation: drive 0.3s ease-in;
+  }
+  
+  @keyframes drive {
+    0% {
+      width: 0;
+    }
+  }

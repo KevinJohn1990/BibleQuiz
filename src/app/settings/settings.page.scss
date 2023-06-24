@@ -1,0 +1,31 @@
+div.container {
+    max-width: 600px;
+    margin: 30px auto;
+}
+div > span{
+    color: black;   
+    display: inline-block;    
+    font-weight: bold;
+    margin: 10px;
+    padding: 5px;
+}
+div.theme > div{
+    display: inline-block;
+    color: white;
+    margin: 5px;
+    box-shadow: 1px 1px 30px var(--var-color-boxshadow);
+}
+
+div.setStyle{    
+    width: 150px;
+    padding:10px;
+}
+
+button.page{
+    box-shadow: 1px 1px 30px var(--var-color-boxshadow);
+    width: 75px;
+    // margin: 5px;
+    // display: inline-block;
+    // padding: 10px;
+    // border: 1px solid var(--ion-color-tertiary);
+}

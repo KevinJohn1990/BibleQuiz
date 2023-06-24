@@ -1,0 +1,19 @@
+div.container {
+    margin: 30px auto;
+    max-width: 600px;
+}
+div.spinner{
+    text-align: center;
+}
+div.chapter {
+    margin: 20px 10%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid silver;
+    box-shadow: 1px 5px 10px var(--var-color-boxshadow);
+    transition: all 0.2s;
+}
+strong, span {
+    color: var(--ion-color-tertiary);
+    font-weight: bold;
+}

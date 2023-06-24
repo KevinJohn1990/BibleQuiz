@@ -1,0 +1,29 @@
+div.container {
+  margin: 30px auto;
+  max-width: 600px;
+}
+div.chapter {
+  margin: 20px 10%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid silver;
+  box-shadow: 1px 5px 10px var(--var-color-boxshadow);
+  transition: all 0.2s;
+}
+strong {
+  color: blue;
+}
+div.addNew{
+  margin: 3px 10%;
+}
+div.spinner{
+  text-align: center;
+}
+div.name,
+div.description {
+  padding: 5px;
+}
+span {
+  color: var(--ion-color-tertiary);
+  font-weight: bold;
+}

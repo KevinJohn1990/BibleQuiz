@@ -1,19 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { IonicModule } from "@ionic/angular";
 
+import { HomePageRoutingModule } from "./home-routing.module";
+
+import { HomePage } from "./home.page";
+import { KComponentsModule } from "../kcomponents/kcomponents.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    KComponentsModule,
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
 })
 export class HomePageModule {}
