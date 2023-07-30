@@ -4,11 +4,19 @@
     <!-- show quiz -->
     <div class="points">
       <span class="team">Team A:</span>
-      <span class="teamPt">{{teamAPoints}} pts</span>
+      <span
+        class="teamPt"
+        [ngStyle]="teamBPoints < teamAPoints ? {'background-color': 'lightgreen'}: {}"
+        >{{teamAPoints}} pts</span
+      >
     </div>
     <div>
       <span class="team">Team B:</span>
-      <span class="teamPt">{{teamBPoints}} pts</span>
+      <span
+        class="teamPt"
+        [ngStyle]="teamBPoints > teamAPoints ? {'background-color': 'lightgreen'}: {}"
+        >{{teamBPoints}} pts</span
+      >
     </div>
     <div
       class="quiz"
@@ -63,6 +71,15 @@
           >{{quizSet[currentIndex].optionD}}
         </div>
       </div>
+      <div
+        class="description"
+        *ngIf="showAnswer && quizSet[currentIndex] && quizSet[currentIndex].description"
+      >
+        <div style="font-weight: bold; text-decoration: underline">Note:</div>
+        <code style="color: red; white-space: pre-line"
+          >{{quizSet[currentIndex].description}}</code
+        >
+      </div>
       <div class="bottom">
         <span class="current">{{currentIndex + 1}}</span>
         <span>/</span>
@@ -74,6 +91,11 @@
   </div>
   <div *ngIf="isAuth">
     <div class="title">Admin page</div>
+    <div>
+      <button (click)="getChapterKey()">
+        Get chapter key - {{this.chapterKey}}
+      </button>
+    </div>
     <!-- Update index -->
     <div class="k-flex">
       <button (click)="prevIndexClick()">Prev</button>
@@ -88,9 +110,7 @@
       >
         Show Options: {{dInfo.showOptions ? "true" : "false"}}
       </button>
-    </div>
-    <!-- Update show answer -->
-    <div>
+      <!-- Update show answer -->
       <button
         [style]="dInfo.showAnswer ? 'background-color:red;color:white':''"
         (click)="dInfo.showAnswer = !dInfo.showAnswer"
@@ -98,39 +118,66 @@
         Show Answer: {{dInfo.showAnswer ? "true" : "false"}}
       </button>
     </div>
+
     <!-- Update points -->
     <div>
       <div class="k-flex">
-        A:
-        <button (click)="dInfo.teamAPoints = dInfo.teamAPoints+5">Add 5</button>
-        <button (click)="dInfo.teamAPoints = dInfo.teamAPoints+10">
+        <button
+          class="k-button"
+          (click)="dInfo.teamAPoints = dInfo.teamAPoints+5"
+        >
+          Add 5
+        </button>
+        <button
+          class="k-button"
+          (click)="dInfo.teamAPoints = dInfo.teamAPoints+10"
+        >
           Add 10
         </button>
-        <button (click)="dInfo.teamAPoints = dInfo.teamAPoints-5">
+        <button
+          class="k-button"
+          (click)="dInfo.teamAPoints = dInfo.teamAPoints-5"
+        >
           Reduce 5
         </button>
-        <button (click)="dInfo.teamAPoints = dInfo.teamAPoints-10">
+        <button
+          class="k-button"
+          (click)="dInfo.teamAPoints = dInfo.teamAPoints-10"
+        >
           Reduce 10
         </button>
         <br />
         Team A points: {{dInfo.teamAPoints}}
       </div>
       <div class="k-flex">
-        B:
-        <button (click)="dInfo.teamBPoints = dInfo.teamBPoints+5">Add 5</button>
-        <button (click)="dInfo.teamBPoints = dInfo.teamBPoints+10">
+        <button
+          class="k-button"
+          (click)="dInfo.teamBPoints = dInfo.teamBPoints+5"
+        >
+          Add 5
+        </button>
+        <button
+          class="k-button"
+          (click)="dInfo.teamBPoints = dInfo.teamBPoints+10"
+        >
           Add 10
         </button>
-        <button (click)="dInfo.teamBPoints = dInfo.teamBPoints-5">
+        <button
+          class="k-button"
+          (click)="dInfo.teamBPoints = dInfo.teamBPoints-5"
+        >
           Reduce 5
         </button>
-        <button (click)="dInfo.teamBPoints = dInfo.teamBPoints-10">
+        <button
+          class="k-button"
+          (click)="dInfo.teamBPoints = dInfo.teamBPoints-10"
+        >
           Reduce 10
         </button>
         <br />
         Team B points: {{dInfo.teamBPoints}}
       </div>
     </div>
-    <button (click)="updateClick()">Update</button>
+    <button class="k-button" (click)="updateClick()">Update</button>
   </div>
 </ion-content>

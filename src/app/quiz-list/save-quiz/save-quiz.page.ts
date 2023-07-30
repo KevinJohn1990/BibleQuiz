@@ -40,6 +40,7 @@ export class SaveQuizPage {
       optionB: new FormControl('', [Validators.required]),
       optionC: new FormControl('', [Validators.required]),
       optionD: new FormControl('', [Validators.required]),
+      description: new FormControl('', []),
     });
   }
 
@@ -103,7 +104,9 @@ export class SaveQuizPage {
   get optionD() {
     return this.QuizGroup.get('optionD');
   }
-
+  get description() {
+    return this.QuizGroup.get('description');
+  }
   save() {
     const quiz: Quiz = this.getQuizFromScreen();
     if (this.validateQuiz(quiz) == false) {
@@ -167,6 +170,7 @@ export class SaveQuizPage {
     quiz.optionB = this.QuizGroup.get('optionB')?.value;
     quiz.optionC = this.QuizGroup.get('optionC')?.value;
     quiz.optionD = this.QuizGroup.get('optionD')?.value;
+    quiz.description = this.QuizGroup.get('description')?.value;
 
     return quiz;
   }
@@ -182,6 +186,7 @@ export class SaveQuizPage {
       optionB: quiz.optionB,
       optionC: quiz.optionC,
       optionD: quiz.optionD,
+      description: quiz.description,
     });
   }
 }

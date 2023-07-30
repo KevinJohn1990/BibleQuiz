@@ -28,12 +28,19 @@
         </div>
         <div class="form-group">
           <label>Question</label>
-          <input
+          <textarea
+            class="form-control"
+            style="width: 100%; min-height: 120px"
+            formControlName="question"
+            required
+          >
+          </textarea>
+          <!-- <input
             type="text"
             class="form-control"
             formControlName="question"
             required
-          />
+          /> -->
           <div class="error" *ngIf="question?.invalid && question?.touched">
             <div *ngIf="question?.errors.required">Question is required</div>
           </div>
@@ -108,7 +115,15 @@
             <div *ngIf="optionD.errors.required">optionD is required</div>
           </div>
         </div>
-
+        <div class="form-group">
+          <label>Description (optional):</label>
+          <textarea
+            class="form-control"
+            style="width: 100%; min-height: 120px"
+            formControlName="description"
+          >
+          </textarea>
+        </div>
         <div class="btn">
           <button type="submit" (click)="save()" class="btn btn-default">
             Save

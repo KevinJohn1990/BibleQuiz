@@ -6,6 +6,7 @@ import { UtilService } from '../utils/util.service';
 import { DashboardInfo, HomeService } from './home.service';
 import { QuizService } from '../quiz-list/quiz/quiz.service';
 import { QuizViewModel } from '../quiz-list/quiz.model';
+import { ChapterService } from '../chapter/chapter.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomePage implements OnInit, OnDestroy {
   gradeTitle = environment.gradeTitle;
   isAuth = false;
   quizSet: QuizViewModel[] = [];
-  private chapterKey = '-NVwbeeVwx8yWLtM-Jt2';
+  private chapterKey = ''; //'-NVwbeeVwx8yWLtM-Jt2';
   private authStateSubs: Subscription = null;
   private authStateSubs2: Subscription = null;
   private quizSubs: Subscription = null;
@@ -25,44 +26,35 @@ export class HomePage implements OnInit, OnDestroy {
     private authService: AuthService,
     private utilService: UtilService,
     private homeService: HomeService,
-    private quizService: QuizService
+    private quizService: QuizService,
+    private chapterService: ChapterService
   ) {}
 
   email: string = '';
   headerTitle: string = 'Bible Quiz';
+  title: string = '';
   ionViewWillEnter() {
-    console.log('Here');
     this.isAuth = this.authService.isAuthenticated();
+    this.chapterKey = this.chapterService.getMainQuizChapterKey();
+    console.log('key: ', this.chapterKey);
+    if (this.chapterKey) {
+      this.chapterService.setMainQuizChapterKey(this.chapterKey);
+      this.fetchQuiz();
+      this.fetchAndSetTitle();
+    }
   }
   ngOnInit(): void {
-    // this.authStateSubs = this.authService.getAuthState().subscribe({
-    //  next:  (user) => {
-    //     if (user) {
-    //       this.email = this.authService.getLoggedInUserEmail();
-    //       if (this.email == '' || this.email.toLowerCase() == 'null') {
-    //         this.headerTitle = 'Bible Quiz';
-    //       } else {
-    //         this.headerTitle = 'Welcome ' + this.email;
-    //       }
-    //     } else {
-    //       this.headerTitle = 'Bible Quiz';
-    //     }
-    //   },
-    //  error: (err) => (this.headerTitle = 'Bible Quiz')
-    // });
-
-    this.quizSubs = this.quizService
-      .getQuizByChapter(this.chapterKey)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.quizSet = res;
-        },
-        error: (err) => console.error('Err in quiz list fetch:', err),
-      });
     this.homeSubs = this.homeService.getSubs('1').subscribe({
       next: (res) => {
         console.log('subs res: ', res);
+        if (this.chapterKey != res.chapterKey) {
+          this.chapterKey = res.chapterKey;
+          if (this.chapterKey) {
+            this.chapterService.setMainQuizChapterKey(this.chapterKey);
+            this.fetchQuiz();
+            this.fetchAndSetTitle();
+          }
+        }
         this.currentIndex = res.currentIndex;
         this.showAnswer = res.showAnswer;
         this.showOptions = res.showOptions;
@@ -73,6 +65,39 @@ export class HomePage implements OnInit, OnDestroy {
         console.error('Err in subs: ', err);
       },
     });
+  }
+
+  chapterInfoSubs: Subscription = null;
+  fetchAndSetTitle() {
+    if (this.chapterInfoSubs !== null) this.chapterInfoSubs.unsubscribe();
+    this.title = '';
+    this.headerTitle = 'Bible Quiz';
+    this.chapterInfoSubs = this.chapterService
+      .getChapter(this.chapterKey)
+      .subscribe({
+        next: (res) => {
+          this.title = res.title;
+          if (this.title) this.headerTitle = 'Bible Quiz - ' + this.title;
+        },
+      });
+  }
+
+  fetchQuiz() {
+    if (this.quizSubs !== null) this.quizSubs.unsubscribe();
+    this.quizSubs = this.quizService
+      .getQuizByChapter(this.chapterKey)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.quizSet = res;
+        },
+        error: (err) => console.error('Err in quiz list fetch:', err),
+      });
+  }
+  getChapterKey() {
+    var key = this.chapterService.getMainQuizChapterKey();
+    this.dInfo.chapterKey = key;
+    this.chapterKey = key;
   }
   prevIndexClick() {
     this.dInfo.currentIndex = this.dInfo.currentIndex - 1;
@@ -91,6 +116,7 @@ export class HomePage implements OnInit, OnDestroy {
   teamAPoints = 0;
   teamBPoints = 0;
   updateClick() {
+    this.dInfo.chapterKey = this.chapterKey;
     this.homeService.updateDashboard('1', this.dInfo);
   }
   createRange(number) {

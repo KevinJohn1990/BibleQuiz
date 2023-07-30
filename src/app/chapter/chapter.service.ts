@@ -19,6 +19,12 @@ export class ChapterService {
     private utilService: UtilService
   ) {}
 
+  setMainQuizChapterKey(chapterKey: string) {
+    localStorage.setItem('mainquizkey', chapterKey);
+  }
+  getMainQuizChapterKey() {
+    return localStorage.getItem('mainquizkey');
+  }
   // getChapter(id: string): Observable<Chapter> {
   //   return this.db.object<Chapter>(`${this.jsonFileName}/${id}`)
   //     .valueChanges();

@@ -1,0 +1,5 @@
+Firebase:
+    Disable Hosting:
+        firebase hosting:disable
+    Deploy:
+        firebase deploy

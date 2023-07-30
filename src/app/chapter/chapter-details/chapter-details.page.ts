@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Chapter, TextBook, TextBookViewModel } from '../chapter.model';
 import { ChapterService } from '../chapter.service';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, firstValueFrom } from 'rxjs';
 import { UtilService } from 'src/app/utils/util.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TextService } from '../text.service';
+import { HomeService } from 'src/app/home/home.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-chapter-details',
@@ -22,9 +24,37 @@ export class ChapterDetailsPage {
     private activatedRoute: ActivatedRoute,
     private utilService: UtilService,
     private textService: TextService,
-    private authService: AuthService
+    private authService: AuthService,
+    private homeService: HomeService,
+    public alertController: AlertController
   ) {}
+  async setMainQuizChapterKey() {
+    const newChapterKey = this.chapter.key;
+    try {
+      this.chapterService.setMainQuizChapterKey(this.chapter.key);
+      const res = await firstValueFrom(this.homeService.getSubs('1'));
+      res.chapterKey = newChapterKey;
+      this.homeService.updateDashboard('1', res);
+      await this.presentAlert({ title: 'Info', msg: 'Success' });
+    } catch (error) {
+      await this.presentAlert({ title: 'Error', msg: error.mesage });
+    }
+  }
 
+  async presentAlert(alertMsg: { title: string; msg: string }) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: alertMsg.title,
+      message: alertMsg.msg,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
   // subscription
   private activatedRouteSubs: Subscription;
   private chapterSubs: Subscription = null;

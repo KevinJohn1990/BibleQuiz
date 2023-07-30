@@ -37,6 +37,7 @@ export class QuizService {
               chapterKey: chapterKey,
               selectedOption: null,
               key: question.key,
+              description: data.description ? data.description : '',
             };
             return quizModel;
           }) as QuizViewModel[];
@@ -62,6 +63,7 @@ export class QuizService {
             optionD: data.optionD,
             chapterKey: chapterKey,
             selectedOption: null,
+            description: data.description ? data.description : '',
             key: quizKey,
           };
           return quizModel;

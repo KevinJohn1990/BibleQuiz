@@ -14,6 +14,7 @@ export class Quiz {
   optionB: string = '';
   optionC: string = '';
   optionD: string = '';
+  description: string = '';
   // chapterKey: string; // chapter key
 }
 export class QuizViewModel {
@@ -27,5 +28,6 @@ export class QuizViewModel {
   optionB: string = '';
   optionC: string = '';
   optionD: string = '';
+  description: string = '';
   chapterKey: string = ''; // chapter key
 }

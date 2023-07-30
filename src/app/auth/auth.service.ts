@@ -95,6 +95,7 @@ export class AuthService {
   storeAuthData() {
     console.log('saving:', this._user);
     localStorage.setItem('email', this._user ? this._user.email : null);
+    localStorage.setItem('email', this._user ? this._user.email : null);
     localStorage.setItem(
       'token',
       this._user && this._user.token ? this._user.token : null
