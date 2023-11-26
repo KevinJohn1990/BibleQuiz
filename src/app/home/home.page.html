@@ -1,84 +1,68 @@
 <app-kheader [title]="headerTitle"></app-kheader>
 <ion-content>
-  <div class="container">
+  <div class="k-container">
     <!-- show quiz -->
-    <div class="points">
-      <span class="team">Team A:</span>
-      <span
-        class="teamPt"
-        [ngStyle]="teamBPoints < teamAPoints ? {'background-color': 'lightgreen'}: {}"
-        >{{teamAPoints}} pts</span
-      >
+    <div class="k-flex">
+      <div>
+        <div class="points">
+          <span class="team">Team A:</span>
+          <span class="teamPt"
+            [ngStyle]="teamBPoints < teamAPoints ? {'background-color': 'lightgreen'}: {}">{{teamAPoints}} pts</span>
+        </div>
+        <div class="points">
+          <span class="team">Team B:</span>
+          <span class="teamPt"
+            [ngStyle]="teamBPoints > teamAPoints ? {'background-color': 'lightgreen'}: {}">{{teamBPoints}} pts</span>
+        </div>
+      </div>
+      <div
+        *ngIf="nSecondsLeft > 0 && quizSet && quizSet.length > 0 && currentIndex >=0 && currentIndex < quizSet.length">
+        <span class="k-timer"
+          [ngStyle]="nSecondsLeft > 5 ? {'background': 'lightgreen'} : {'color': 'white', 'background': 'red'}">
+          {{nSecondsLeft}} seconds
+        </span>
+      </div>
+      <div
+        *ngIf="nSecondsLeft <= 0 && quizSet && quizSet.length > 0 && currentIndex >=0 && currentIndex < quizSet.length">
+        <span class="k-timer"
+          [ngStyle]="nSecondsLeft > 5 ? {'background': 'lightgreen'} : {'color': 'RED', 'background': 'WHITE'}">
+          TIME UP
+        </span>
+      </div>
     </div>
-    <div>
-      <span class="team">Team B:</span>
-      <span
-        class="teamPt"
-        [ngStyle]="teamBPoints > teamAPoints ? {'background-color': 'lightgreen'}: {}"
-        >{{teamBPoints}} pts</span
-      >
-    </div>
-    <div
-      class="quiz"
-      *ngIf="quizSet && quizSet.length > 0 && currentIndex >=0 && currentIndex < quizSet.length"
-      (click)="optionSelected($event)"
-    >
+    <div class="quiz" *ngIf="quizSet && quizSet.length > 0 && currentIndex >=0 && currentIndex < quizSet.length"
+      (click)="optionSelected($event)">
       <div class="question">
         <span> {{currentIndex +1 }}. </span>
         {{quizSet[currentIndex].question}}
       </div>
 
       <div class="options" *ngIf="showOptions">
-        <div
-          class="option optionB"
-          id="optionA"
-          [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 0}"
-        >
-          <span
-            [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 0}"
-            >A.
+        <div class="option optionB" id="optionA"
+          [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 0}">
+          <span [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 0}">A.
           </span>
           {{quizSet[currentIndex].optionA}}
         </div>
-        <div
-          class="option optionB"
-          id="optionB"
-          [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 1}"
-        >
-          <span
-            [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 1}"
-            >B. </span
-          >{{quizSet[currentIndex].optionB}}
+        <div class="option optionB" id="optionB"
+          [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 1}">
+          <span [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 1}">B.
+          </span>{{quizSet[currentIndex].optionB}}
         </div>
-        <div
-          class="option optionC"
-          id="optionC"
-          [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 2}"
-        >
-          <span
-            [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 2}"
-            >C. </span
-          >{{quizSet[currentIndex].optionC}}
+        <div class="option optionC" id="optionC"
+          [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 2}">
+          <span [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 2}">C.
+          </span>{{quizSet[currentIndex].optionC}}
         </div>
-        <div
-          class="option optionD"
-          id="optionD"
-          [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 3}"
-        >
-          <span
-            [ngClass]="{'optionSelected':showAnswer &&  quizSet[currentIndex].correctOption == 3}"
-            >D. </span
-          >{{quizSet[currentIndex].optionD}}
+        <div class="option optionD" id="optionD"
+          [ngClass]="{'optionSelected': showAnswer && quizSet[currentIndex].correctOption == 3}">
+          <span [ngClass]="{'optionSelected':showAnswer &&  quizSet[currentIndex].correctOption == 3}">D.
+          </span>{{quizSet[currentIndex].optionD}}
         </div>
       </div>
-      <div
-        class="description"
-        *ngIf="showAnswer && quizSet[currentIndex] && quizSet[currentIndex].description"
-      >
+      <div class="description" *ngIf="showAnswer && quizSet[currentIndex] && quizSet[currentIndex].description">
         <div style="font-weight: bold; text-decoration: underline">Note:</div>
-        <code style="color: red; white-space: pre-line"
-          >{{quizSet[currentIndex].description}}</code
-        >
+        <code style="color: red; white-space: pre-line">{{quizSet[currentIndex].description}}</code>
       </div>
       <div class="bottom">
         <span class="current">{{currentIndex + 1}}</span>
@@ -104,17 +88,13 @@
     </div>
     <!-- Update show options -->
     <div>
-      <button
-        (click)="dInfo.showOptions = !dInfo.showOptions"
-        [style]="dInfo.showOptions ? 'background-color:red;color:white':''"
-      >
+      <button (click)="dInfo.showOptions = !dInfo.showOptions"
+        [style]="dInfo.showOptions ? 'background-color:red;color:white':''">
         Show Options: {{dInfo.showOptions ? "true" : "false"}}
       </button>
       <!-- Update show answer -->
-      <button
-        [style]="dInfo.showAnswer ? 'background-color:red;color:white':''"
-        (click)="dInfo.showAnswer = !dInfo.showAnswer"
-      >
+      <button [style]="dInfo.showAnswer ? 'background-color:red;color:white':''"
+        (click)="dInfo.showAnswer = !dInfo.showAnswer">
         Show Answer: {{dInfo.showAnswer ? "true" : "false"}}
       </button>
     </div>
@@ -122,61 +102,43 @@
     <!-- Update points -->
     <div>
       <div class="k-flex">
-        <button
-          class="k-button"
-          (click)="dInfo.teamAPoints = dInfo.teamAPoints+5"
-        >
+        <button class="k-button" (click)="dInfo.teamAPoints = dInfo.teamAPoints+5">
           Add 5
         </button>
-        <button
-          class="k-button"
-          (click)="dInfo.teamAPoints = dInfo.teamAPoints+10"
-        >
+        <button class="k-button" (click)="dInfo.teamAPoints = dInfo.teamAPoints+10">
           Add 10
         </button>
-        <button
-          class="k-button"
-          (click)="dInfo.teamAPoints = dInfo.teamAPoints-5"
-        >
+        <button class="k-button" (click)="dInfo.teamAPoints = dInfo.teamAPoints-5">
           Reduce 5
         </button>
-        <button
-          class="k-button"
-          (click)="dInfo.teamAPoints = dInfo.teamAPoints-10"
-        >
+        <button class="k-button" (click)="dInfo.teamAPoints = dInfo.teamAPoints-10">
           Reduce 10
         </button>
         <br />
         Team A points: {{dInfo.teamAPoints}}
       </div>
       <div class="k-flex">
-        <button
-          class="k-button"
-          (click)="dInfo.teamBPoints = dInfo.teamBPoints+5"
-        >
+        <button class="k-button" (click)="dInfo.teamBPoints = dInfo.teamBPoints+5">
           Add 5
         </button>
-        <button
-          class="k-button"
-          (click)="dInfo.teamBPoints = dInfo.teamBPoints+10"
-        >
+        <button class="k-button" (click)="dInfo.teamBPoints = dInfo.teamBPoints+10">
           Add 10
         </button>
-        <button
-          class="k-button"
-          (click)="dInfo.teamBPoints = dInfo.teamBPoints-5"
-        >
+        <button class="k-button" (click)="dInfo.teamBPoints = dInfo.teamBPoints-5">
           Reduce 5
         </button>
-        <button
-          class="k-button"
-          (click)="dInfo.teamBPoints = dInfo.teamBPoints-10"
-        >
+        <button class="k-button" (click)="dInfo.teamBPoints = dInfo.teamBPoints-10">
           Reduce 10
         </button>
         <br />
         Team B points: {{dInfo.teamBPoints}}
       </div>
+    </div>
+    <div class="k-flex">
+      <input class="numInput" type="number" [(ngModel)]="dInfo.timerMaxSec" />
+      <button class="k-button" (click)="dInfo.restartTimer = !dInfo.restartTimer ">
+        Restart timer : {{dInfo.restartTimer ? "true" : "false"}}
+      </button>
     </div>
     <button class="k-button" (click)="updateClick()">Update</button>
   </div>

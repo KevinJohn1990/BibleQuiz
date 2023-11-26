@@ -1,12 +1,6 @@
 <ion-app class="main">
   <!-- <ion-split-pane contentId="main-content"> -->
-  <ion-menu
-    menuId="m1"
-    side="start"
-    contentId="main-content"
-    type="overlay"
-    style="padding: 0"
-  >
+  <ion-menu menuId="m1" side="start" contentId="main-content" type="overlay" style="padding: 0">
     <ion-content>
       <ion-list id="inbox-list" style="padding: 0">
         <ion-toolbar color="tertiary">
@@ -16,43 +10,20 @@
           </ion-title>
         </ion-toolbar>
 
-        <ion-menu-toggle
-          auto-hide="false"
-          *ngFor="let p of appPages; let i = index"
-        >
-          <ion-item
-            (click)="selectedIndex = i"
-            routerDirection="root"
-            [routerLink]="[p.url]"
-            lines="none"
-            detail="false"
-            [class.selected]="selectedIndex == i"
-          >
-            <ion-icon
-              slot="start"
-              [ios]="p.icon + '-outline'"
-              [md]="p.icon + '-sharp'"
-            ></ion-icon>
-            <ion-label class="l-label">{{ p.title }}</ion-label>
-          </ion-item>
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+          <ng-container *ngIf="!p.requiresLogin ||(p.requiresLogin && bLoggedIn)">
+            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none"
+              detail="false" [class.selected]="selectedIndex == i">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label class="l-label">{{ p.title }}</ion-label>
+            </ion-item>
+          </ng-container>
         </ion-menu-toggle>
-        <ion-item
-          (click)="login()"
-          routerDirection="root"
-          lines="none"
-          detail="false"
-          *ngIf="!bLoggedIn"
-        >
+        <ion-item (click)="login()" routerDirection="root" lines="none" detail="false" *ngIf="!bLoggedIn">
           <ion-icon slot="start" name="man-outline"></ion-icon>
           <ion-label class="l-label">Login</ion-label>
         </ion-item>
-        <ion-item
-          (click)="logout()"
-          routerDirection="root"
-          lines="none"
-          detail="false"
-          *ngIf="bLoggedIn"
-        >
+        <ion-item (click)="logout()" routerDirection="root" lines="none" detail="false" *ngIf="bLoggedIn">
           <ion-icon slot="start" name="walk-outline"></ion-icon>
           <ion-label class="l-label">Logout</ion-label>
         </ion-item>

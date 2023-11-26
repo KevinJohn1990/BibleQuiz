@@ -18,16 +18,19 @@ export class AppComponent {
       title: 'Home',
       url: '/home',
       icon: 'home',
+      requiresLogin : false,
     },
     {
       title: 'Chapter',
       url: '/chapter',
       icon: 'chapter',
+      requiresLogin : true,
     },
     {
       title: 'Quiz',
       url: '/quiz-list',
       icon: 'medal',
+      requiresLogin : true,
     },
   ];
   constructor(

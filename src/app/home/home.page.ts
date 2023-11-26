@@ -22,6 +22,7 @@ export class HomePage implements OnInit, OnDestroy {
   private authStateSubs2: Subscription = null;
   private quizSubs: Subscription = null;
   private homeSubs: Subscription = null;
+  intervalId: any;
   constructor(
     private authService: AuthService,
     private utilService: UtilService,
@@ -60,6 +61,20 @@ export class HomePage implements OnInit, OnDestroy {
         this.showOptions = res.showOptions;
         this.teamAPoints = res.teamAPoints;
         this.teamBPoints = res.teamBPoints;
+        console.log('res1:', res);
+        console.log('dinfo:', this.dInfo);
+        if (!res.timerMaxSec) res.timerMaxSec = 15;
+        this.dInfo.currentIndex = res.currentIndex;
+        this.dInfo.timerMaxSec = res.timerMaxSec;
+        this.dInfo.restartTimer = false;
+        if (res.restartTimer) {
+          if (this.intervalId != null) this.stopTimer();
+          this.maxSeconds = res.timerMaxSec;
+          if (this.maxSeconds < 10) this.maxSeconds = 10;
+          if (this.maxSeconds > 60) this.maxSeconds = 60;
+          this.startDate = new Date();
+          this.startTimer();
+        }
       },
       error: (err) => {
         console.error('Err in subs: ', err);
@@ -103,11 +118,13 @@ export class HomePage implements OnInit, OnDestroy {
     this.dInfo.currentIndex = this.dInfo.currentIndex - 1;
     this.dInfo.showAnswer = false;
     this.dInfo.showOptions = false;
+    this.dInfo.restartTimer = true;
   }
   nextIndexClick() {
     this.dInfo.currentIndex = this.dInfo.currentIndex + 1;
     this.dInfo.showAnswer = false;
     this.dInfo.showOptions = false;
+    this.dInfo.restartTimer = true;
   }
   dInfo = new DashboardInfo();
   currentIndex = -1;
@@ -128,5 +145,37 @@ export class HomePage implements OnInit, OnDestroy {
     this.utilService.unSubscribeSubscription(this.authStateSubs2);
     this.utilService.unSubscribeSubscription(this.quizSubs);
     this.utilService.unSubscribeSubscription(this.homeSubs);
+  }
+  private startDate = new Date();
+  nSecondsLeft = 0;
+  maxSeconds = 10;
+  private startTimer() {
+    // Set up a function to be called every second
+    this.intervalId = setInterval(() => {
+      // Log the current date
+      const currentDate = new Date();
+      // console.log(`Current Date: ${currentDate}`);
+      var diff = this.dateDiffInSeconds(this.startDate, currentDate);
+      if (diff >= this.maxSeconds) {
+        this.stopTimer();
+      }
+      var nTemp = Math.round(this.maxSeconds - diff);
+      if (nTemp < 0) nTemp = 0;
+      this.nSecondsLeft = nTemp;
+    }, 1000); // 1000 milliseconds = 1 second
+  }
+  private dateDiffInSeconds(date1: Date, date2: Date): number {
+    const timestamp1 = date1.getTime(); // Get the timestamp of the first date in milliseconds
+    const timestamp2 = date2.getTime(); // Get the timestamp of the second date in milliseconds
+
+    // Calculate the difference in seconds
+    const diffInSeconds = Math.abs((timestamp2 - timestamp1) / 1000);
+
+    return diffInSeconds;
+  }
+
+  // Stop the timer when needed
+  stopTimer() {
+    clearInterval(this.intervalId);
   }
 }

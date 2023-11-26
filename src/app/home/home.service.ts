@@ -8,6 +8,8 @@ export class DashboardInfo {
   teamAPoints: number = 0;
   teamBPoints: number = 0;
   chapterKey: string = '';
+  restartTimer: boolean = false;
+  timerMaxSec: number = 15;
 }
 
 @Injectable({

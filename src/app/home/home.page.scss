@@ -1,9 +1,17 @@
-div.container {
-  max-width: 600px;
-  margin: 30px auto;
+div.k-container {
+  max-width: 700px;
+  margin: 0px auto;
+}
+.k-timer {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid silver;
+  margin-left: 15px;
+  font-size: 21px;
+  font-weight: bold;
 }
 div {
-  padding: 10px;
+  padding: 2px;
 }
 div.ref {
   // text-transform: uppercase;
@@ -14,7 +22,7 @@ div.ref {
 }
 
 div.header {
-  margin: 10px;
+  margin: 5px;
   color: var(--ion-color-tertiary);
   font-size: 1.2rem;
   font-weight: bold;
@@ -22,7 +30,7 @@ div.header {
   box-shadow: 5px 5px 15px var(--var-color-boxshadow);
 }
 div.data {
-  margin: 10px;
+  margin: 5px;
 }
 div.note {
   color: var(--ion-color-tertiary);
@@ -31,6 +39,7 @@ div.note {
 }
 .k-flex {
   display: flex;
+  align-items: center;
 }
 .numInput {
   max-width: 200px;
@@ -43,7 +52,7 @@ div {
 }
 div.container {
   margin: 3% auto;
-  max-width: 500px;
+  max-width: 700px;
   // border: 1px solid gray;
   // box-shadow: 2px 2px 10px var(--var-color-boxshadow);
   // border-radius: 5px;
@@ -58,11 +67,11 @@ div.data {
   // height: 100%;
   text-align: center;
   // vertical-align: middle;
-  padding: 10px;
+  padding: 5px;
 }
 
 div.quiz {
-  padding: 10px;
+  padding: 2px;
 }
 div.question {
   padding: 10px;
@@ -73,7 +82,7 @@ div.option {
   font-size: 1.3rem;
   padding: 10px;
   border-radius: 5px;
-  margin: 10px;
+  margin: 5px;
   border: 1px solid silver;
   vertical-align: middle;
 }
@@ -100,7 +109,7 @@ div.footer {
   width: 120px;
   text-align: center;
   background-color: var(--ion-color-tertiary);
-  padding: 10px;
+  padding: 5px;
   color: white;
 }
 .btn:hover,
@@ -113,20 +122,20 @@ div.optionSelected {
   background-color: rgb(21, 210, 65);
   color: black;
 }
-div.quizCompleted {
-  margin: 30px auto;
-  text-align: center;
-}
-div.quizCompleted span {
-  display: inline-block;
-  margin: 10px;
-  font-size: 2rem;
-}
-div.quizCompleted span.correct,
-div.quizCompleted span.total {
-  border: 1px solid gray;
-  padding: 30px;
-}
+// div.quizCompleted {
+//   margin: 30px auto;
+//   text-align: center;
+// }
+// div.quizCompleted span {
+//   display: inline-block;
+//   margin: 10px;
+//   font-size: 2rem;
+// }
+// div.quizCompleted span.correct,
+// div.quizCompleted span.total {
+//   border: 1px solid gray;
+//   padding: 30px;
+// }
 div.quizResult {
   text-align: center;
 }
@@ -137,10 +146,10 @@ div.quizCompleted .Remarks {
 .hideResult {
   display: none;
 }
-.btn.tryagain {
-  width: auto;
-  margin: 100px 30%;
-}
+// .btn.tryagain {
+//   width: auto;
+//   margin: 100px 30%;
+// }
 div.resultHeading {
   font-size: 1.5rem;
   color: var(--ion-color-tertiary);
@@ -153,19 +162,28 @@ div.bottom span.current,
 div.bottom span.total {
   padding: 5px;
 }
+
 .team {
-  border-radius: 5px;
+  // border-radius: 5px;
+  display: inline-block;
   border: 1px solid black;
   background-color: royalblue;
-  color: white;
-  margin: 5px;
+  color: #ffffff;
+  margin: 1px;
   padding: 4px;
+  min-width: 100px;
+  max-width: 100px;
+  text-align: center;
 }
 .teamPt {
+  display: inline-block;
   border: 1px solid black;
-  margin: 5px;
+  margin: 1px;
   padding: 4px;
   color: blue;
   font-weight: bold;
   background-color: white;
+  min-width: 100px;
+  max-width: 100px;
+  text-align: center;
 }
